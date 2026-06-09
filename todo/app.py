@@ -1,6 +1,6 @@
 from http import HTTPStatus
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 
 from todo.schemas import UserDB, UserList, UserPublic, UserSchema
 
@@ -24,3 +24,17 @@ def create_user(user: UserSchema):
 @app.get('/users/', response_model=UserList)
 def read_users():
     return {'users': database}
+
+
+@app.put(
+    '/users/{user_id}', response_model=UserPublic, status_code=HTTPStatus.OK
+)
+def update_user(user_id: int, user: UserSchema):
+    user_with_id = UserDB(**user.model_dump(), id=user_id)
+    if user_id < 1 or user_id > len(database):
+        raise HTTPException(
+            status_code=HTTPStatus.NOT_FOUND, detail='Usuário não encontrado.'
+        )
+
+    database[user_id - 1] = user_with_id
+    return user_with_id
