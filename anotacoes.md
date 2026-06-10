@@ -1,0 +1,10 @@
+- Uma forma de subir o servidor na rede local, é passando o host 0.0.0.0:
+  - ex.: poetry run fastapi dev todo/app.py --host 0.0.0.0
+- Para revisar e entender melhor a Session e a Engine, assitir a aula 04 a partir de 31:19
+- Caso queira ver de forma rápida o arquivo local de banco de dados, dá pra usar o pipx pra executar o harlequin:
+  - pipx run harlequin database.db
+- Tasks:
+  - ver lives:
+    - #258: [SQLAlchemy: conceitos básicos, uma introdução a versão 2](https://www.youtube.com/watch?v=t4C1c62Z4Ag)
+    - #211: [Migrações, bancos de dados evolutivos (Alembic e SQLAlchemy) ](https://www.youtube.com/watch?v=yQtqkq9UkDA)
+    - #207: [Variáveis de ambiente, dotenv, constantes e configurações](https://www.youtube.com/watch?v=DiiKff1z2Yw)
