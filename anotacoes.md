@@ -8,3 +8,5 @@
     - #258: [SQLAlchemy: conceitos básicos, uma introdução a versão 2](https://www.youtube.com/watch?v=t4C1c62Z4Ag)
     - #211: [Migrações, bancos de dados evolutivos (Alembic e SQLAlchemy) ](https://www.youtube.com/watch?v=yQtqkq9UkDA)
     - #207: [Variáveis de ambiente, dotenv, constantes e configurações](https://www.youtube.com/watch?v=DiiKff1z2Yw)
+    - #151: [Desvendando o yield e as funções geradoras](https://www.youtube.com/watch?v=ZjwZ9nfhsk4)
+    - #168: [Pytest Fixtures](https://www.youtube.com/watch?v=sidi9Z_IkLU)
