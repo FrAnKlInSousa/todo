@@ -1,15 +1,19 @@
 from http import HTTPStatus
 
 
-def test_delete_user_success(client, user):
-    response = client.delete(f'/users/{user.id}')
+def test_delete_user_success(client, user, token):
+    response = client.delete(
+        f'/users/{user.id}', headers={'Authorization': f'Bearer {token}'}
+    )
 
     assert response.status_code == HTTPStatus.OK
     assert response.json() == {'message': 'User deleted'}
 
 
-def test_delete_user_not_found(client):
-    response = client.delete('/users/0')
+def test_delete_user_not_found(client, token):
+    response = client.delete(
+        '/users/0', headers={'Authorization': f'Bearer {token}'}
+    )
 
-    assert response.status_code == HTTPStatus.NOT_FOUND
-    assert response.json() == {'detail': 'User not found'}
+    assert response.status_code == HTTPStatus.FORBIDDEN
+    assert response.json() == {'detail': 'Not enough permissions'}

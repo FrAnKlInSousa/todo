@@ -66,5 +66,14 @@ def user(session):
     session.add(user)
     session.commit()
     session.refresh(user)
-    user.clear_password = password
+    user.clean_password = password
     return user
+
+
+@pytest.fixture
+def token(client, user):
+    data = {'username': user.email, 'password': user.clean_password}
+
+    response = client.post('/token', data=data)
+
+    return response.json()['access_token']

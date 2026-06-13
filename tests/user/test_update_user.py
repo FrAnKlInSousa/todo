@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
 
-def test_update_user_success(client, user):
+def test_update_user_success(client, user, token):
     response = client.put(
         '/users/1',
         json={
@@ -9,6 +9,7 @@ def test_update_user_success(client, user):
             'password': '122',
             'email': 'user_edit@mail.com',
         },
+        headers={'Authorization': f'Bearer {token}'},
     )
 
     assert response.status_code == HTTPStatus.OK
@@ -19,7 +20,7 @@ def test_update_user_success(client, user):
     }
 
 
-def test_update_user_not_found(client):
+def test_update_user_not_found(client, user, token):
     response = client.put(
         '/users/0',
         json={
@@ -27,11 +28,12 @@ def test_update_user_not_found(client):
             'password': '122',
             'email': 'user_edit@mail.com',
         },
+        headers={'Authorization': f'Bearer {token}'},
     )
-    assert response.status_code == HTTPStatus.NOT_FOUND
+    assert response.status_code == HTTPStatus.FORBIDDEN
 
 
-def test_update_integrity_error(client, user):
+def test_update_integrity_error(client, user, token):
     client.post(
         '/users/',
         json={
@@ -48,6 +50,7 @@ def test_update_integrity_error(client, user):
             'email': 'asd@email.com',
             'password': 'senha123',
         },
+        headers={'Authorization': f'Bearer {token}'},
     )
 
     assert response.status_code == HTTPStatus.CONFLICT
