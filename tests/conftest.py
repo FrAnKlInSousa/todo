@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 from todo.app import app
 from todo.database import get_session
 from todo.models import User, table_registry
+from todo.security import create_password_hash
 
 
 @pytest.fixture
@@ -56,10 +57,14 @@ def mock_db_time():
 
 @pytest.fixture
 def user(session):
+    password = 'secret123'
     user = User(
-        username='user_test', email='test@mail.com', password='secret123'
+        username='user_test',
+        email='test@mail.com',
+        password=create_password_hash(password),
     )
     session.add(user)
     session.commit()
     session.refresh(user)
+    user.clear_password = password
     return user
