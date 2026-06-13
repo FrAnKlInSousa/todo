@@ -11,8 +11,6 @@ from todo.schemas import Message, UserList, UserPublic, UserSchema
 
 app = FastAPI()
 
-database = []
-
 
 @app.get('/')
 def read_root():
