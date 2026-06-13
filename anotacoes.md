@@ -10,3 +10,4 @@
     - #207: [Variáveis de ambiente, dotenv, constantes e configurações](https://www.youtube.com/watch?v=DiiKff1z2Yw)
     - #151: [Desvendando o yield e as funções geradoras](https://www.youtube.com/watch?v=ZjwZ9nfhsk4)
     - #168: [Pytest Fixtures](https://www.youtube.com/watch?v=sidi9Z_IkLU)
+- 'secrets' é uma biblioteca nativa do python que pode ser usada para gerar senhas. 
