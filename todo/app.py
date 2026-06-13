@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from todo.database import get_session
 from todo.models import User
 from todo.schemas import Message, UserList, UserPublic, UserSchema
+from todo.security import create_password_hash
 
 app = FastAPI()
 
@@ -34,7 +35,11 @@ def create_user(user: UserSchema, session=Depends(get_session)):
             status_code=HTTPStatus.CONFLICT,
         )
 
-    user_db = User(**user.model_dump())
+    user_db = User(
+        username=user.username,
+        email=user.email,
+        password=create_password_hash(user.password),
+    )
 
     session.add(user_db)
 
@@ -78,7 +83,7 @@ def update_user(
     try:
         user_db.email = user.email
         user_db.username = user.username
-        user_db.password = user.password
+        user_db.password = create_password_hash(user.password)
 
         session.add(user_db)
         session.commit()
