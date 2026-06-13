@@ -49,10 +49,9 @@ addopts = '-p no:warnings'
 
 [tool.taskipy.tasks]
 lint = 'ruff check'
-pre_fmt = 'ruff check --fix'
 fmt = 'ruff format'
 run = 'fastapi dev todo/app.py'
-pre_test = 'task lint'
+pre_test = 'task fmt'
 test = 'pytest -s -x --cov=todo -vv'
 post_test = 'coverage html'
 
