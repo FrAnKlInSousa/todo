@@ -6,6 +6,7 @@ def test_create_user_success(client):
         '/users/',
         json={'username': 'test', 'password': '', 'email': 'user@mail.com'},
     )
+
     assert response.status_code == HTTPStatus.CREATED
     assert response.json() == {
         'username': 'test',
