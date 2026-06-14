@@ -61,7 +61,7 @@ def mock_db_time():
 
 
 @pytest.fixture
-def user(session):
+def user(session: AsyncSession):
     password = 'secret123'
     user = User(
         username='user_test',
