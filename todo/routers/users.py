@@ -1,4 +1,5 @@
 from http import HTTPStatus
+from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
@@ -11,9 +12,12 @@ from todo.security import create_password_hash, get_current_user, get_session
 
 router = APIRouter(prefix='/users', tags=['users'])
 
+Session = Annotated[Session, Depends(get_session)]
+CurrentUser = Annotated[User, Depends(get_current_user)]
+
 
 @router.post('/', status_code=HTTPStatus.CREATED, response_model=UserPublic)
-def create_user(user: UserSchema, session=Depends(get_session)):
+def create_user(user: UserSchema, session: Session):
 
     user_db = session.scalar(
         select(User).where(
@@ -44,17 +48,17 @@ def create_user(user: UserSchema, session=Depends(get_session)):
 
 @router.get('/', response_model=UserList)
 def read_users(
+    session: Session,
+    current_user: CurrentUser,
     limit: int = 10,
     offset: int = 0,
-    session: Session = Depends(get_session),
-    current_user=Depends(get_current_user),
 ):
     users = session.scalars(select(User).limit(limit).offset(offset))
     return {'users': users}
 
 
 @router.get('/{user_id}', response_model=UserPublic, status_code=HTTPStatus.OK)
-def read_user(user_id: int, session: Session = Depends(get_session)):
+def read_user(user_id: int, session: Session):
     user_db = session.scalar(select(User).where(User.id == user_id))
     if not user_db:
         raise HTTPException(
@@ -68,8 +72,8 @@ def read_user(user_id: int, session: Session = Depends(get_session)):
 def update_user(
     user_id: int,
     user: UserSchema,
-    session: Session = Depends(get_session),
-    current_user: User = Depends(get_current_user),
+    session: Session,
+    current_user: CurrentUser,
 ):
 
     if current_user.id != user_id:
@@ -95,8 +99,8 @@ def update_user(
 @router.delete('/{user_id}', status_code=HTTPStatus.OK, response_model=Message)
 def delete_user(
     user_id: int,
-    session: Session = Depends(get_session),
-    current_user: User = Depends(get_current_user),
+    session: Session,
+    current_user: CurrentUser,
 ):
 
     if current_user.id != user_id:
