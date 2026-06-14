@@ -10,6 +10,7 @@ from todo.app import app
 from todo.database import get_session
 from todo.models import User, table_registry
 from todo.security import create_password_hash
+from todo.settings import Settings
 
 
 @pytest.fixture
@@ -77,3 +78,11 @@ def token(client, user):
     response = client.post('/auth/token', data=data)
 
     return response.json()['access_token']
+
+
+@pytest.fixture
+def settings():
+    settings = Settings()
+    # exemplo de manipulação que dá pra fazer com essa fixture
+    settings.ACCESS_TOKEN_EXPIRE_MINUTES = 35
+    return settings
