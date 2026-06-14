@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+
 from todo.routers import auth, users
 
 app = FastAPI()
