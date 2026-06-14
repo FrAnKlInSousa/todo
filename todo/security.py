@@ -16,7 +16,7 @@ pwd_context = PasswordHash.recommended()
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 SECRET_KEY = 'YOU_SECRET_KEY'
 ALGORITHM = 'HS256'
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl='auth/token')
 
 
 def create_password_hash(password: str):
