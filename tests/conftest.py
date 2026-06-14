@@ -74,6 +74,6 @@ def user(session):
 def token(client, user):
     data = {'username': user.email, 'password': user.clean_password}
 
-    response = client.post('/token', data=data)
+    response = client.post('/auth/token', data=data)
 
     return response.json()['access_token']
