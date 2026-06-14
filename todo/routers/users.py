@@ -1,13 +1,13 @@
 from http import HTTPStatus
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from todo.models import User
-from todo.schemas import Message, UserList, UserPublic, UserSchema
+from todo.schemas import FilterPage, Message, UserList, UserPublic, UserSchema
 from todo.security import create_password_hash, get_current_user, get_session
 
 router = APIRouter(prefix='/users', tags=['users'])
@@ -50,10 +50,11 @@ def create_user(user: UserSchema, session: Session):
 def read_users(
     session: Session,
     current_user: CurrentUser,
-    limit: int = 10,
-    offset: int = 0,
+    filter_users: Annotated[FilterPage, Query()],
 ):
-    users = session.scalars(select(User).limit(limit).offset(offset))
+    users = session.scalars(
+        select(User).limit(filter_users.limit).offset(filter_users.offset)
+    )
     return {'users': users}
 
 
