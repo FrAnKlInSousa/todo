@@ -14,6 +14,13 @@
       import secrets
       secrets.token_hex(32)
   ```
+- Ao usar o sqlite, quando precisar deixar ele assíncrono, basta alterar o valor dela no .env:
+  - `DATABASE_URL='sqlite:///database.db'` para:
+  - `DATABASE_URL='sqlite+aiosqlite:///database.db'`
+- O pytest tem um comando para listar todos os testes do projeto:
+```shell
+    task test --collect-only
+```
 
 # Tasks:
   - ver lives:
