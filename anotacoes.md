@@ -39,3 +39,4 @@
 # Livros
 - [Cosmic Python](http://www.cosmicpython.com/book/preface.html)
 - [Python Fluente 2e](https://github.com/pythonfluente/pythonfluente2e/releases/tag/trilogia-2026-03-23)
+- [Test Driven Development: By Example](https://www.kufunda.net/publicdocs/TDD.%20Desenvolvimento%20Guiado%20por%20Testes%20(Kent%20Beck).pdf)
