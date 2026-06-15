@@ -20,7 +20,7 @@ def test_create_user_with_same_email(client, user):
         '/users',
         json={
             'username': 'joao',
-            'email': 'test@mail.com',
+            'email': user.email,
             'password': 'secret123',
         },
     )
@@ -33,7 +33,7 @@ def test_create_user_with_same_username(client, user):
     response = client.post(
         '/users/',
         json={
-            'username': 'user_test',
+            'username': user.username,
             'email': 'joao@mail.com',
             'password': 'secret123',
         },
