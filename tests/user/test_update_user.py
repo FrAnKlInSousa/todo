@@ -20,7 +20,7 @@ def test_update_user_success(client, user, token):
     }
 
 
-def test_update_user_not_found(client, user, token):
+def test_update_user_not_found(client, token):
     response = client.put(
         '/users/0',
         json={
@@ -31,22 +31,15 @@ def test_update_user_not_found(client, user, token):
         headers={'Authorization': f'Bearer {token}'},
     )
     assert response.status_code == HTTPStatus.FORBIDDEN
+    assert response.json() == {'detail': 'Not enough permissions'}
 
 
-def test_update_integrity_error(client, user, token):
-    client.post(
-        '/users/',
-        json={
-            'username': 'ana',
-            'email': 'ana@email.com',
-            'password': 'senha123',
-        },
-    )
+def test_update_integrity_error(client, other_user, user, token):
 
     response = client.put(
         f'/users/{user.id}',
         json={
-            'username': 'ana',
+            'username': other_user.username,
             'email': 'asd@email.com',
             'password': 'senha123',
         },
