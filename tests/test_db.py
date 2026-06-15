@@ -1,7 +1,9 @@
 from dataclasses import asdict
+
 import pytest
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+
 from todo.models import User
 
 
