@@ -1,4 +1,5 @@
 from http import HTTPStatus
+
 from freezegun import freeze_time
 
 
@@ -83,7 +84,7 @@ def test_token_expired_dont_refresh(client, user):
 
     with freeze_time('2026-06-15 16:13:00'):
         response = client.post(
-            f'/auth/refresh_token',
+            '/auth/refresh_token',
             headers={'Authorization': f'Bearer {token}'},
         )
 

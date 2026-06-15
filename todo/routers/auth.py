@@ -10,9 +10,9 @@ from todo.models import User
 from todo.schemas import Token
 from todo.security import (
     create_access_token,
+    get_current_user,
     get_session,
     verify_password,
-    get_current_user,
 )
 
 router = APIRouter(prefix='/auth', tags=['auth'])
