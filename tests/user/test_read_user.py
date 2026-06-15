@@ -13,14 +13,18 @@ def test_list_users_with_users(client, user, token):
     assert response.json() == {'users': [user_schema]}
 
 
-def test_read_an_existent_user(user, client):
-    response = client.get(f'/users/{user.id}')
+def test_read_an_existent_user(user, client, token):
+    response = client.get(
+        f'/users/{user.id}', headers={'Authorization': f'Bearer {token}'}
+    )
 
     assert response.status_code == HTTPStatus.OK
     assert response.json() == UserPublic.model_validate(user).model_dump()
 
 
-def test_read_an_inexistent_user(client):
-    response = client.get('/users/1')
+def test_read_an_inexistent_user(client, token):
+    response = client.get(
+        '/users/0', headers={'Authorization': f'Bearer {token}'}
+    )
     assert response.status_code == HTTPStatus.NOT_FOUND
     assert response.json() == {'detail': 'User not found'}

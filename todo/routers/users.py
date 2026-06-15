@@ -61,6 +61,7 @@ async def read_users(
 @router.get('/{user_id}', response_model=UserPublic, status_code=HTTPStatus.OK)
 async def read_user(
     user_id: int,
+    current_user: CurrentUser,
     session: Session,
 ):
     # todo ver o pq q esse ep falha se colocar o current_user
