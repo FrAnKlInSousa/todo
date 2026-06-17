@@ -54,8 +54,8 @@ asyncio_default_fixture_loop_scope = 'function'
 
 [tool.taskipy.tasks]
 lint = 'ruff check --fix'
-post_lint = 'task fmt'
 fmt = 'ruff format'
+post_fmt = 'ruff check --fix'
 run = 'fastapi dev todo/app.py'
 pre_test = 'task fmt'
 test = 'pytest -s -x --cov=todo -vv'
