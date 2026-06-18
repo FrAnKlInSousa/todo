@@ -7,7 +7,14 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from todo.database import get_session
 from todo.models import Todo, User
-from todo.schemas import FilterTodo, Message, TodoList, TodoPublic, TodoSchema
+from todo.schemas import (
+    FilterTodo,
+    Message,
+    TodoList,
+    TodoPublic,
+    TodoSchema,
+    TodoUpdate,
+)
 from todo.security import get_current_user
 
 router = APIRouter(prefix='/todos', tags=['todos'])
@@ -64,3 +71,27 @@ async def delete_todo(todo_id: int, user: CurrentUser, session: Session):
     await session.commit()
 
     return {'message': 'Task has been deleted successfully.'}
+
+
+@router.patch(
+    '/{todo_id}', status_code=HTTPStatus.OK, response_model=TodoPublic
+)
+async def update_todo(
+    todo_id: int, user: CurrentUser, session: Session, todo: TodoUpdate
+):
+    db_todo = await session.scalar(
+        select(Todo).where(Todo.user_id == user.id, Todo.id == todo_id)
+    )
+
+    if not db_todo:
+        raise HTTPException(
+            status_code=HTTPStatus.NOT_FOUND, detail='Task not found.'
+        )
+
+    for key, value in todo.model_dump(exclude_unset=True).items():
+        setattr(db_todo, key, value)
+
+    session.add(db_todo)
+    await session.commit()
+    await session.refresh(db_todo)
+    return db_todo
