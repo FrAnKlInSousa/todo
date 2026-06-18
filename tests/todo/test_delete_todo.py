@@ -1,19 +1,8 @@
 from http import HTTPStatus
 
-import factory.fuzzy
 import pytest
 
-from todo.models import Todo, TodoState
-
-
-class TodoFactory(factory.Factory):
-    class Meta:
-        model = Todo
-
-    title = factory.Faker('text')
-    description = factory.Faker('text')
-    user_id = 1
-    state = factory.fuzzy.FuzzyChoice(TodoState)
+from tests.factories.todo_factory import TodoFactory
 
 
 @pytest.mark.asyncio

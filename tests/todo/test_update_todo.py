@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 import pytest
 
-from tests.todo.test_delete_todo import TodoFactory
+from tests.factories.todo_factory import TodoFactory
 
 
 def test_update_inexistent_todo(client, token):
