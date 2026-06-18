@@ -34,9 +34,9 @@ class FilterPage(BaseModel):
     limit: int = Field(ge=0, default=10)
 
 
-class FilterTodos(FilterPage):
-    title: str | None = Field(min_length=3)
-    description: str | None = Field(min_length=3)
+class FilterTodo(FilterPage):
+    title: str | None = Field(default=None, min_length=3)
+    description: str | None = Field(default=None, min_length=3)
     state: TodoState | None = None
 
 
@@ -48,3 +48,8 @@ class TodoSchema(BaseModel):
 
 class TodoPublic(TodoSchema):
     id: int
+    user_id: int
+
+
+class TodoList(BaseModel):
+    todos: list[TodoPublic]
