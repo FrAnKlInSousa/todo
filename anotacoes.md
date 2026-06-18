@@ -35,6 +35,7 @@
     - #242: [Trio: Concorrência estruturada](https://www.youtube.com/watch?v=pejxUqrT7yo)
     - #258: [SQLAlchemy: conceitos básicos, uma introdução a versão 2](https://www.youtube.com/watch?v=t4C1c62Z4Ag)
     - #281: [Randomização de dados em testes unitários com Faker e Factory-boy](https://www.youtube.com/watch?v=q_P-2h5L1cE)
+    - #285: [Testes baseados em propriedades: uma introdução ao Hypothesis](https://www.youtube.com/watch?v=ZLmFJhwh7hE)
     - #305: [Boas práticas para clientes HTTP](https://www.youtube.com/watch?v=U_qmGH34sgc)
 
 # Livros
