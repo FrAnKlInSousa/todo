@@ -3,19 +3,21 @@ from http import HTTPStatus
 import pytest
 
 from tests.factories.todo_factory import TodoFactory
+from todo.models import Todo
 
 
-def test_create_todo(client, token):
-    response = client.post(
-        '/todos',
-        json={
-            'title': 'title',
-            'description': 'description',
-            'state': 'todo',
-            'id': 1,
-        },
-        headers={'Authorization': f'Bearer {token}'},
-    )
+def test_create_todo(client, token, mock_db_time):
+    with mock_db_time(model=Todo) as time:
+        response = client.post(
+            '/todos',
+            json={
+                'title': 'title',
+                'description': 'description',
+                'state': 'todo',
+                'id': 1,
+            },
+            headers={'Authorization': f'Bearer {token}'},
+        )
 
     assert response.status_code == HTTPStatus.CREATED
     assert response.json() == {
@@ -24,6 +26,8 @@ def test_create_todo(client, token):
         'state': 'todo',
         'id': 1,
         'user_id': 1,
+        'created_at': time.isoformat(),
+        'updated_at': time.isoformat(),
     }
 
 
