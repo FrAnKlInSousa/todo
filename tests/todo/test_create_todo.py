@@ -4,7 +4,12 @@ from http import HTTPStatus
 def test_create_todo(client, token):
     response = client.post(
         '/todos',
-        json={'title': 'title', 'description': 'description', 'state': 'todo'},
+        json={
+            'title': 'title',
+            'description': 'description',
+            'state': 'todo',
+            'id': 1,
+        },
         headers={'Authorization': f'Bearer {token}'},
     )
 
@@ -14,4 +19,5 @@ def test_create_todo(client, token):
         'description': 'description',
         'state': 'todo',
         'id': 1,
+        'user_id': 1,
     }
