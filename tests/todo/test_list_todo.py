@@ -55,12 +55,12 @@ async def test_should_filter_description_and_list_5_todos(
 ):
     expected_len = 5
     session.add_all(TodoFactory.create_batch(5))
-    session.add_all(TodoFactory.create_batch(5, description='minha'))
+    session.add_all(TodoFactory.create_batch(5, description='minha descrição'))
 
     await session.commit()
 
     response = client.get(
-        '/todos/?description=min',
+        '/todos/?description=minha desc',
         headers={'Authorization': f'Bearer {token}'},
     )
     assert response.status_code == HTTPStatus.OK
