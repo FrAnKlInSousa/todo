@@ -1,16 +1,16 @@
 from contextlib import contextmanager
 from datetime import datetime
 
-import factory
 import pytest
 import pytest_asyncio
 from fastapi.testclient import TestClient
 from sqlalchemy import StaticPool, event
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 
+from tests.factories.user_factory import UserFactory
 from todo.app import app
 from todo.database import get_session
-from todo.models import User, table_registry
+from todo.models import table_registry
 from todo.security import create_password_hash
 from todo.settings import Settings
 
@@ -98,12 +98,3 @@ def settings():
     # exemplo de manipulação que dá pra fazer com essa fixture
     settings.ACCESS_TOKEN_EXPIRE_MINUTES = 35
     return settings
-
-
-class UserFactory(factory.Factory):
-    class Meta:
-        model = User
-
-    username = factory.Sequence(lambda n: f'test{n}')
-    email = factory.LazyAttribute(lambda obj: f'{obj.username}@test.com')
-    password = factory.LazyAttribute(lambda obj: f'{obj.username}_secret')
