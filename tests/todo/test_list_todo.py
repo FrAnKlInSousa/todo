@@ -3,6 +3,7 @@ from http import HTTPStatus
 import pytest
 
 from tests.factories.todo_factory import TodoFactory
+from todo.models import Todo
 
 
 @pytest.mark.asyncio
@@ -54,3 +55,33 @@ async def test_should_filter_description_and_list_5_todos(
     )
     assert response.status_code == HTTPStatus.OK
     assert len(response.json()['todos']) == expected_len
+
+
+@pytest.mark.asyncio
+async def test_should_return_all_todo_fields(
+    client, token, user, session, mock_db_time
+):
+    with mock_db_time(model=Todo) as time:
+        todo = TodoFactory(user_id=user.id)
+        session.add(todo)
+        await session.commit()
+        await session.refresh(todo)
+
+        response = client.get(
+            '/todos', headers={'Authorization': f'Bearer {token}'}
+        )
+
+    assert response.status_code == HTTPStatus.OK
+    assert response.json() == {
+        'todos': [
+            {
+                'created_at': time.isoformat(),
+                'updated_at': time.isoformat(),
+                'description': todo.description,
+                'id': todo.id,
+                'state': todo.state,
+                'title': todo.title,
+                'user_id': todo.user_id,
+            }
+        ]
+    }
