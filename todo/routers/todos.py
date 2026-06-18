@@ -33,15 +33,14 @@ async def list_todos(
     todo_filter: Annotated[FilterTodo, Query()],
 ):
     query = select(Todo).where(Todo.user_id == user.id)
-
     if todo_filter.state:
-        query.filter(Todo.state == todo_filter.state)
+        query = query.filter(Todo.state == todo_filter.state)
 
     if todo_filter.title:
-        query.filter(Todo.title == todo_filter.title)
+        query = query.filter(Todo.title.contains(todo_filter.title))
 
     if desc := todo_filter.description:  # exemplo com operador walrus
-        query.filter(Todo.description == desc)
+        query = query.filter(Todo.description.contains(desc))
 
     todos = await session.scalars(
         query.limit(todo_filter.limit).offset(todo_filter.offset)
