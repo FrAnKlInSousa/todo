@@ -21,6 +21,11 @@
 ```shell
     task test --collect-only
 ```
+- ao trocar o banco do sqlite para postgres, foi substituído o seguinte conteúdo do .env:
+- DATABASE_URL='sqlite+aiosqlite:///database.db'
+- na config do conftest, foi substituído o caminho do banco em create_async_engine(
+        'sqlite+aiosqlite:///:memory:', connect_args={'check_same_thread': False}, poolclass=StaticPool
+      )
 
 # Tasks:
   - ver lives:
@@ -42,3 +47,8 @@
 - [Cosmic Python](http://www.cosmicpython.com/book/preface.html)
 - [Python Fluente 2e](https://github.com/pythonfluente/pythonfluente2e/releases/tag/trilogia-2026-03-23)
 - [Test Driven Development: By Example](https://www.kufunda.net/publicdocs/TDD.%20Desenvolvimento%20Guiado%20por%20Testes%20(Kent%20Beck).pdf)
+
+# Tópicos para estudar
+- Docker
+- Mimesis (framework para gerar dados)
+- 
