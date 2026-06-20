@@ -37,6 +37,7 @@
   - ver lives:
     - #151 -> #154 [Playlist de corrotinas](https://www.youtube.com/watch?v=ZjwZ9nfhsk4&list=PLOQgLBuj2-3J4IRxalwXhRMU6UPoaigf9)
     - #168: [Pytest Fixtures](https://www.youtube.com/watch?v=sidi9Z_IkLU)
+    - #170: [Github Actions](https://www.youtube.com/watch?v=L1f6N6NcgPw)
     - #189: [Documentado projetos com MkDocs](https://www.youtube.com/watch?v=GW6nAJ1NHUQ)
     - #204: [Profiling, identificando problemas de performance](https://www.youtube.com/watch?v=cHraQ2I0Xgk)
     - #207: [Variáveis de ambiente, dotenv, constantes e configurações](https://www.youtube.com/watch?v=DiiKff1z2Yw)
