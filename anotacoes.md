@@ -26,6 +26,12 @@
 - na config do conftest, foi substituído o caminho do banco em create_async_engine(
         'sqlite+aiosqlite:///:memory:', connect_args={'check_same_thread': False}, poolclass=StaticPool
       )
+- docker file:
+  - --no-ansi: serve pra não exibir mensagens coloridinhas.
+  - --no-interaction: às vezes o poetry pede alguma confirmação pra reinstalar algo que já está instalado, essa tag serve pra ele não perguntar nada.
+  - --without dev: serve para não instalar as dependências de desenvolvimento, o que tomaria mais tempo.
+  - buildando o projeto: docker build -t "todo" .
+  - rodando o projeto:docker run -it --name todo -p 8000:8000 todo ou: docker run todo
 
 # Tasks:
   - ver lives:
