@@ -32,6 +32,8 @@
   - --without dev: serve para não instalar as dependências de desenvolvimento, o que tomaria mais tempo.
   - buildando o projeto: docker build -t "todo" .
   - rodando o projeto:docker run -it --name todo -p 8000:8000 todo ou: docker run todo
+- CI:
+  - para testar o ci sem ter que ficar fazendo vários pushes, por exemplo, dá pra usar a ferramenta act (nektos act)
 
 # Tasks:
   - ver lives:
@@ -42,6 +44,7 @@
     - #204: [Profiling, identificando problemas de performance](https://www.youtube.com/watch?v=cHraQ2I0Xgk)
     - #207: [Variáveis de ambiente, dotenv, constantes e configurações](https://www.youtube.com/watch?v=DiiKff1z2Yw)
     - #211: [Migrações, bancos de dados evolutivos (Alembic e SQLAlchemy) ](https://www.youtube.com/watch?v=yQtqkq9UkDA)
+    - #222: [Automação de browsers com Playwright](https://www.youtube.com/watch?v=Br0cJo2YeNg)
     - #224: [Rich: fazendo prints incríveis](https://www.youtube.com/watch?v=gadMAObZ_1Y)
     - #234: [Requests assíncronos com HTTPX](https://www.youtube.com/watch?v=V4hSLZRCGoE)
     - #242: [Trio: Concorrência estruturada](https://www.youtube.com/watch?v=pejxUqrT7yo)
@@ -58,4 +61,6 @@
 # Tópicos para estudar
 - Docker
 - Mimesis (framework para gerar dados)
-- 
+- complexidade ciclomática
+- sonarQube
+- GitHub actions (com jenkins??)
