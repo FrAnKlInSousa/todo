@@ -64,3 +64,4 @@
 - complexidade ciclomática
 - sonarQube
 - GitHub actions (com jenkins??)
+- Locust (framework de teste de carga)
