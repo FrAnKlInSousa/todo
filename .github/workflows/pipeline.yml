@@ -17,14 +17,14 @@ jobs:
       - name: Instalar o poetry
         run: pipx install poetry
 
-      - name: Instalar dependencias
+      - name: Instalar dependências
         run: poetry install
 
-      - name: Roda os testes
+      - name: Executar testes
         run: poetry run task test
 
     env:
-      DATABASE_URL: {{secrets.DATABASE_URL}}
-      ACCESS_TOKEN_EXPIRE_MINUTES: {{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
-      SECRET_KEY: {{secrets.SECRET_KEY}}
-      ALGORITHM: {{secrets.ALGORITHM}}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      ALGORITHM: ${{ secrets.ALGORITHM }}
