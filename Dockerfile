@@ -10,4 +10,3 @@ RUN poetry config installer.max-workers 10
 RUN poetry install --no-interaction --no-ansi --without dev
 
 EXPOSE 8000
-CMD poetry run uvicorn --host 0.0.0.0 todo.app:app
