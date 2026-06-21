@@ -1,0 +1,30 @@
+name: pipeline
+on: [ push, pull_request ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Copia os arquivos do repositorio
+        uses: actions/checkout@v7
+
+      - name: Instalar o python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Instalar o poetry
+        run: pipx install poetry
+
+      - name: Instalar dependencias
+        run: poetry install
+
+      - name: Roda os testes
+        run: poetry run task test
+
+    env:
+      DATABASE_URL: {{secrets.DATABASE_URL}}
+      ACCESS_TOKEN_EXPIRE_MINUTES: {{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
+      SECRET_KEY: {{secrets.SECRET_KEY}}
+      ALGORITHM: {{secrets.ALGORITHM}}
